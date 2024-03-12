@@ -1,19 +1,62 @@
 #include<bits/stdc++.h>
 using namespace std;
-quicksort(){
 
-};
-int main ()
-{
-    int n,i,h;
-    cin>>n;
-    int a [n];
-    for( i=0;i<n;i++)
+int partition(int a[], int low, int high)
+{ int pivot = a[low];
+    int i = low + 1;  // Initialize i to the next element after pivot
+    int j = high;
+
+    while (i <= j)
     {
-        cin>>a[i];
+        if (a[i] < pivot && i <= high) 
+        {
+            i++;
+        }
+        else if (a[j] > pivot && j >= low)
+        {
+            j--;
+        }
+        else if (i <= j) // Swap a[i] and a[j] only if i and j have not crossed each other
+        {
+            swap(a[i], a[j]);
+            i++;
+            j--;
+        }
     }
-    quicksort(a,n-1);
-    int pivot=a[0]; //first element from the array
-    h = a[n-1];// last element from the array
-    
+    swap(a[low], a[j]); // Swap pivot with the correct position in the array
+    return j; // Return the index of the pivot element
+}
+
+void quickSort(int a[], int low, int high)
+{
+    if (low < high)
+    {
+        int pivotIndex = partition(a, low, high);
+        // Recursive calls to sort the sub-arrays
+        quickSort(a, low, pivotIndex - 1);
+        quickSort(a, pivotIndex + 1, high);
+    }
+}
+
+int main()
+{
+    int a[] = {5, 12, 7, 1, 13, 2, 23, 11, 18};
+    int size = sizeof(a) / sizeof(a[0]);
+    // cout << "Original array: ";
+    // for (int i = 0; i < size; i++)
+    // {
+    //     cout << a[i] << " ";
+    // }
+    // cout << endl;
+
+    quickSort(a, 0, size - 1);
+
+    cout << "Sorted array: ";
+    for (int i = 0; i < size; i++)
+    {
+        cout << a[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
 }

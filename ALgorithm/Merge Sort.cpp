@@ -26,11 +26,13 @@ void merge(int a[], int beg, int mid, int end)
         {
             a[k] = LeftArray[i];
             i++;
+            //k++;
         }
         else
         {
             a[k] = RightArray[j];
             j++;
+            //k++;
         }
         k++;
     }
