@@ -1,5 +1,4 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
 
 /* Function to merge the subarrays of a[] */
 void merge(int a[], int beg, int mid, int end)
@@ -11,9 +10,9 @@ void merge(int a[], int beg, int mid, int end)
     int LeftArray[n1], RightArray[n2]; // temporary arrays
 
     /* copy data to temp arrays */
-    for (int i = 0; i < n1; i++)
+    for (i = 0; i < n1; i++)
         LeftArray[i] = a[beg + i];
-    for (int j = 0; j < n2; j++)
+    for (j = 0; j < n2; j++)
         RightArray[j] = a[mid + 1 + j];
 
     i = 0;   /* initial index of first sub-array */
@@ -26,13 +25,11 @@ void merge(int a[], int beg, int mid, int end)
         {
             a[k] = LeftArray[i];
             i++;
-            //k++;
         }
         else
         {
             a[k] = RightArray[j];
             j++;
-            //k++;
         }
         k++;
     }
@@ -62,22 +59,22 @@ void mergeSort(int a[], int beg, int end)
     }
 }
 
-/* TODO: Function to print the array */
+/* Function to print the array */
 void printArray(int a[], int n)
 {
     int i;
     for (i = 0; i < n; i++)
-        cout << a[i] << " ";
+        printf("%d ", a[i]);
 }
 
 int main()
 {
     int a[] = {11, 30, 24, 7, 31, 16, 39, 41};
     int n = sizeof(a) / sizeof(a[0]);
-    cout << "Before sorting array elements are - \n";
+    printf("Before sorting, array elements are:\n");
     printArray(a, n);
     mergeSort(a, 0, n - 1);
-    cout << "\nAfter sorting array elements are - \n";
+    printf("\nAfter sorting, array elements are:\n");
     printArray(a, n);
     return 0;
 }
