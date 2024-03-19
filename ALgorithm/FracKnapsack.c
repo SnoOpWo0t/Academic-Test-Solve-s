@@ -37,7 +37,6 @@ It passes the knapsack capacity c, the array of items T,
  the starting index 0 indicating the first item, and 3 as the last index (although it should be 2 for the third item). 
  The function calculates the maximum profit achievable and stores it in the variable profit.
 
-
 */
 /*c: This is a float representing the capacity of the knapsack, i.e., the maximum weight it can hold.
 
