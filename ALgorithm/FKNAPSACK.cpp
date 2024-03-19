@@ -21,6 +21,6 @@ int main() {
     };
     float c = 50;  // C = bag capacity
     float profit = GreedyKS(c, T, 0, 3); 
-    cout<<profit<<endl;               //0 is the starting index and 3 is the last index
+    cout<<"profit"<<profit<<endl;               //0 is the starting index and 3 is the last index
     return 0;
 }
