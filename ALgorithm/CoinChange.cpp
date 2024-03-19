@@ -9,17 +9,18 @@ int greedyCoinChange(int c[], int n, int i)  //c = coin array, n = amount of cha
 { if (n == 0) {
         return 0;
     }
-    if (i < numCoins && c[i] <= n) //if the coin value is less than or equal to the amount of change needed
+    if (i < numCoins && c[i] <= n) //if coin value is less/equal to the amount of change needed and the index is <the number of coins
     {
         output[i]++; //increment the number of coins used
         return 1 + greedyCoinChange(c, n - c[i], i); //recursively call function with the new amount of change needed
     } else {
         return greedyCoinChange(c, n, i + 1); //recursively call function with the next coin in the array
     }
+
 }
 
 int main() {
-    int numCoins = 5;
+   // int numCoins = 5;
     int c[numCoins] = {50, 25, 10, 5, 1};
     int n = 87; //n is the amount of change needed
 

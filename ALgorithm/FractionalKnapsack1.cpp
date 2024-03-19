@@ -8,17 +8,18 @@ float GreedyKS(float c, int T[][4], int i, int n)
 {
     if (c <= 0 || i > n)
         return 0;
-    if (c < T[i][2])
+    if (c < T[i][2]) //if the remaining capacity is less than the weight of the current item
     {
         float p = c / T[i][2] * T[i][1];
         return p; //P = profit (c/w * v)
     }
 
-    return T[i][1] + GreedyKS(c - T[i][2], T, i + 1, n);
+    return T[i][1] + GreedyKS(c - T[i][2], T, i + 1, n);//return the value of the current item plus the value of the next item
+//c - T[i][2] is the remaining capacity after selecting the current item, and i + 1 is  next item's index, n is last index
 }
 
 int main()
-{ //heere row is the item and column is the id, value, weight, value/weight
+{ //row is item and column is the id, value, weight, value/weight
 // n = 3, c = 50
     int T[3][4] = { 
     //   0, 1, 2, 3
@@ -27,7 +28,7 @@ int main()
         {2, 100, 20, 5},
         {3, 120, 30, 4}};
     float c = 50;  //C = Bag capacity
-    float profit = GreedyKS(c, T, 0, 3); // Note: n should be 3 for the given array, as indexing starts from 0
+    float profit = GreedyKS(c, T, 0, 3); // Note: n should be 3  as indexing starts from 0
     cout << profit << endl;         //0 is the starting index and 3 is the last index
     return 0;
 }
