@@ -9,7 +9,6 @@ float GreedyKS(float c, int T[3][4], int i, int n)
         float p = c / T[i][2] * T[i][1];
         return p;
     }
-
     return T[i][1] + GreedyKS(c - T[i][2], T, i + 1, n);
 }
 int main() {
@@ -21,6 +20,6 @@ int main() {
     };
     float c = 50;  // C = bag capacity
     float profit = GreedyKS(c, T, 0, 3); 
-    cout<<"profit"<<profit<<endl;               //0 is the starting index and 3 is the last index
+    cout<<"profit "<<profit<<endl;     //0 is the starting index and 3 is the last index
     return 0;
 }
