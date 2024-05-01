@@ -3,7 +3,6 @@ using namespace std;
 // Function to solve 0/1 knapsack using dynamic programming
 float knapsackDP(int capacity, int items[][3], int n) {
     float dp[n + 1][capacity + 1]; //creates new array named dp array to store the maximum profit
-
     // Initialize dp array
     for (int i = 0; i <= n; ++i) { 
         for (int w = 0; w <= capacity; ++w) {
@@ -24,7 +23,7 @@ float knapsackDP(int capacity, int items[][3], int n) {
     { 
         if (dp[i][w] != dp[i - 1][w]) { //If the value of the current item is not equal to the value of the previous item, 
         //current V != prev                         //it means that the current item is included in the knapsack.
-            cout << items[i - 1][0] << " ";//prints the ID of the selected item.
+            cout << items[i - 1][0] << " "; //prints the ID of the current item.
             w -= items[i - 1][2]; //updates the remaining capacity by subtracting the weight of the current item.
         }
     }

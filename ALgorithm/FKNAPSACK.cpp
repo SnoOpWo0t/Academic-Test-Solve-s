@@ -5,7 +5,8 @@ float GreedyKS(float c, int T[3][4], int i, int n)
         if (c <= 0 || i > n)
         return 0;
 
-    if (c < T[i][2]) {
+    if (c < T[i][2]) 
+    {
         float p = c / T[i][2] * T[i][1];
         return p;
     }
