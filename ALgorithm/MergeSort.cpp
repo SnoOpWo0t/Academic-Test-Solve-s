@@ -70,7 +70,7 @@ void printArray(int a[], int n)
 
 int main()
 {
-    int a[] = {11, 30, 24, 7, 31, 16, 39, 41};
+    int a[] = {11, 30, 1,42,2,24, 7, 31, 16, 39, 41};
     int n = sizeof(a) / sizeof(a[0]);
     cout << "Before sorting array elements are - \n";
     printArray(a, n);

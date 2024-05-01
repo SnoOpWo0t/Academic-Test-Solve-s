@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 int lcs(string string1, string string2)
  {
     int n = string1.size();

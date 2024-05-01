@@ -20,7 +20,8 @@ int main() {
         {3, 120, 30, 4}
     };
     float c = 50;  // C = bag capacity
-    float profit = GreedyKS(c, T, 0, 3); 
+    int n = sizeof(T) / sizeof(T[0]);
+    float profit = GreedyKS(c, T, 0, n); 
     cout<<"profit "<<profit<<endl;     //0 is the starting index and 3 is the last index
     return 0;
 }

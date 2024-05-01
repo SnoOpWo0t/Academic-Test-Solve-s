@@ -2,7 +2,8 @@
 using namespace std;
 
 int partition(int a[], int low, int high)
-{ int pivot = a[low];
+{ 
+    int pivot = a[low];
     int i = low + 1;  // Initialize i to the next element after pivot
     int j = high;
 
@@ -23,8 +24,9 @@ int partition(int a[], int low, int high)
             j--;
         }
     }
-    swap(a[low], a[j]); // Swap pivot with the correct position in the array
-    return j; // Return the index of the pivot element
+     swap(a[low], a[j]);
+    return j;
+   
 }
 
 void quickSort(int a[], int low, int high)
@@ -40,7 +42,7 @@ void quickSort(int a[], int low, int high)
 
 int main()
 {
-    int a[] = {5, 12, 7, 1, 13, 2, 23, 11, 18};
+    int a[] = {1,5, 12, 7,7,8, 1, 13, 2, 23, 11, 18};
     int size = sizeof(a) / sizeof(a[0]);
     // cout << "Original array: ";
     // for (int i = 0; i < size; i++)

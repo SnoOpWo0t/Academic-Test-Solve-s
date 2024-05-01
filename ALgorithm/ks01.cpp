@@ -17,15 +17,15 @@ float knapsackDP(int capacity, int items[][3], int n) {
         } 
     }
     int w = capacity; //W =  remaining capacity
-    cout << "Selected items (ID): ";
-    for (int i = n; i > 0 && w > 0; --i)  // loop continues until either all items have been considered or the remaining capacity becomes zero.
-    { 
-        if (dp[i][w] != dp[i - 1][w]) { //If the value of the current item is not equal to the value of the previous item, 
-        //current V != prev                         //it means that the current item is included in the knapsack.
-            cout << items[i - 1][0] << " "; //prints the ID of the current item.
-            w -= items[i - 1][2]; //updates the remaining capacity by subtracting the weight of the current item.
-        }
-    }
+    // cout << "Selected items (ID): ";
+    // for (int i = n; i > 0 && w > 0; --i)  // loop continues until either all items have been considered or the remaining capacity becomes zero.
+    // { 
+    //     if (dp[i][w] != dp[i - 1][w]) { //If the value of the current item is not equal to the value of the previous item, 
+    //     //current V != prev                         //it means that the current item is included in the knapsack.
+    //         cout << items[i - 1][0] << " "; //prints the ID of the current item.
+    //         w -= items[i - 1][2]; //updates the remaining capacity by subtracting the weight of the current item.
+    //     }
+    // }
     cout << endl;
     return dp[n][capacity];
 }

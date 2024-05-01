@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define V 5
-void dfs(int graph[V][V], bool visited[V], int start) {
+void dfs(int graph[V][V], bool visited[V], int start) 
+{
     cout << start << " ";
 
     visited[start] = true;

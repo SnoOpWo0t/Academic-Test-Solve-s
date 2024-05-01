@@ -17,15 +17,15 @@ int partition(int a[],int low,int high)
             j--;
 
         }
-        if(i<j)
+        if(i<j)// Swap a[i] and a[j] only if i and j have not crossed each other
         {
             swap(a[i],a[j]);
             i++;
             j--;
         }
     }
-    swap(a[low],a[j]);
-    return j;
+    swap(a[low], a[j]); // Swap pivot with the correct position in the array
+    return j; // Return the index of the pivot element
 }
 void quicksort(int a[],int low,int high)
 {
