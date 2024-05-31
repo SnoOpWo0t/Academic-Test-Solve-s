@@ -1,23 +1,23 @@
 #include<bits/stdc++.h>
 using namespace std;
-float GreedyKS(float c, int T[3][4], int i, int n) 
+float GreedyKS(float capacity, int T[3][4], int i, int n) 
 {
-        if (c <= 0 || i > n)
+        if (capacity <= 0 || i > n)
         return 0;
 
-    if (c < T[i][2]) 
+    if (capacity < T[i][2]) 
     {
-        float p = c / T[i][2] * T[i][1];
-        return p;
+        float profit = capacity / T[i][2] * T[i][1];
+        return profit;
     }
-    return T[i][1] + GreedyKS(c - T[i][2], T, i + 1, n);
+    return T[i][1] + GreedyKS(capacity - T[i][2], T, i + 1, n);
 }
 int main() {
     int T[3][4] = {
         // id, v, w, v/w
-        {1, 60, 10, 6},
-        {2, 100, 20, 5},
-        {3, 120, 30, 4}
+        {1, 60, 10},
+        {2, 100, 20},
+        {3, 120, 30}
     };
     float c = 50;  // C = bag capacity
     int n = sizeof(T) / sizeof(T[0]);
