@@ -1,0 +1,277 @@
+1. parent(X, Y) :- father(Y, X).
+   parent(X, Y) :- mother(Y, X).
+   - Purpose: True if X is a parent of Y (either father or mother).
+   - Query: parent(zeus, ares).
+
+2. sibling(X, Y) :- parent(P, X), parent(P, Y), X \= Y.
+   - Purpose: True if X and Y share at least one parent.
+   - Query: sibling(zeus, poseidon).
+
+3. full_sibling(X, Y) :- father(X, F), father(Y, F), mother(X, M), mother(Y, M), X \= Y.
+   - Purpose: True if X and Y share both parents.
+   - Query: full_sibling(zeus, hera).
+
+4. half_sibling(X, Y) :- sibling(X, Y), \+ full_sibling(X, Y).
+   - Purpose: True if X and Y share only one parent.
+   - Query: half_sibling(thor, loki).
+
+5. grandparent(GP, C) :- parent(GP, P), parent(P, C).
+   - Purpose: True if GP is a grandparent of C.
+   - Query: grandparent(chronus, hermes).
+
+6. great_grandparent(GGP, C) :- grandparent(GGP, P), parent(P, C).
+   - Purpose: True if GGP is a great-grandparent of C.
+   - Query: great_grandparent(uranus, zeus).
+
+7. ancestor(A, D) :- parent(A, D).
+   ancestor(A, D) :- parent(A, X), ancestor(X, D).
+   - Purpose: True if A is any ancestor (parent, grandparent, etc.) of D. (Recursive)
+   - Query: ancestor(chronus, zeus).
+
+8. descendant(D, A) :- ancestor(A, D).
+   - Purpose: True if D is a descendant of A.
+   - Query: descendant(ganesha, shiva).
+
+9. uncle_aunt(U, N) :- parent(P, N), sibling(U, P), male_god(U).
+   - Purpose: True if U is an uncle of N.
+   - Query: uncle_aunt(hades, hermes).
+
+10. aunt(A, N) :- parent(P, N), sibling(A, P), female_god(A).
+    - Purpose: True if A is an aunt of N.
+    - Query: aunt(hera, dionysus).
+
+11. cousin(X, Y) :- parent(P1, X), parent(P2, Y), sibling(P1, P2).
+    - Purpose: True if X and Y are cousins.
+    - Query: cousin(ares, hermes).
+
+12. married(X, Y) :- spouse(X, Y).
+    married(X, Y) :- spouse(Y, X).
+    - Purpose: True if X and Y are married (order-insensitive).
+    - Query: married(zeus, hera).
+
+================================================================================
+CLASSIFICATION RULES
+================================================================================
+
+13. male_god(X) :- god(X, _, male, _, _).
+    - Purpose: True if X is a male deity.
+    - Query: male_god(zeus).
+
+14. female_god(X) :- god(X, _, female, _, _).
+    - Purpose: True if X is a female deity.
+    - Query: female_god(hera).
+
+15. gender_neutral(X) :- god(X, _, none, _, _).
+    gender_neutral(X) :- god(X, _, neutral, _, _).
+    - Purpose: True if X is a gender-neutral deity.
+    - Query: gender_neutral(inari).
+
+16. supreme_deity(X) :- god(X, _, _, supreme_deity, _).
+    - Purpose: True if X is a supreme deity.
+    - Query: supreme_deity(zeus).
+
+17. major_deity(X) :- god(X, _, _, major_deity, _).
+    - Purpose: True if X is a major deity.
+    - Query: major_deity(hera).
+
+18. minor_deity(X) :- god(X, _, _, minor_deity, _).
+    - Purpose: True if X is a minor deity.
+    - Query: minor_deity(erios).
+
+19. primordial_deity(X) :- god(X, _, _, primordial, _).
+    - Purpose: True if X is a primordial deity.
+    - Query: primordial_deity(chronus).
+
+20. prophet(X) :- god(X, _, _, prophet, _).
+    - Purpose: True if X is a prophet.
+    - Query: prophet(muhammad).
+
+21. avatar(X) :- god(X, _, _, avatar, _).
+    - Purpose: True if X is an avatar.
+    - Query: avatar(krishna).
+
+22. divine_figure(X) :- god(X, _, _, divine_figure, _).
+    - Purpose: True if X is a divine figure.
+    - Query: divine_figure(jesus).
+
+23. ancient_deity(X) :- god(X, _, _, _, ancient).
+    - Purpose: True if X is an ancient era deity.
+    - Query: ancient_deity(zeus).
+
+24. classical_deity(X) :- god(X, _, _, _, classical).
+    - Purpose: True if X is a classical era deity.
+    - Query: classical_deity(hera).
+
+25. medieval_deity(X) :- god(X, _, _, _, medieval).
+    - Purpose: True if X is a medieval era deity.
+    - Query: medieval_deity(odin).
+
+26. modern_deity(X) :- god(X, _, _, _, modern).
+    - Purpose: True if X is a modern era deity.
+    - Query: modern_deity(allah).
+
+27. greek_god(X) :- god(X, greek, _, _, _).
+    - Purpose: True if X is a Greek god.
+    - Query: greek_god(zeus).
+
+28. norse_god(X) :- god(X, norse, _, _, _).
+    - Purpose: True if X is a Norse god.
+    - Query: norse_god(odin).
+
+29. hindu_god(X) :- god(X, hindu, _, _, _).
+    - Purpose: True if X is a Hindu god.
+    - Query: hindu_god(shiva).
+
+30. japanese_god(X) :- god(X, japanese, _, _, _).
+    - Purpose: True if X is a Japanese god.
+    - Query: japanese_god(amaterasu).
+
+31. egyptian_god(X) :- god(X, egyptian, _, _, _).
+    - Purpose: True if X is an Egyptian god.
+    - Query: egyptian_god(ra).
+
+32. celtic_god(X) :- god(X, celtic, _, _, _).
+    - Purpose: True if X is a Celtic god.
+    - Query: celtic_god(dagda).
+
+33. islamic_figure(X) :- god(X, islamic, _, _, _).
+    - Purpose: True if X is an Islamic figure.
+    - Query: islamic_figure(allah).
+
+34. christian_figure(X) :- god(X, christian, _, _, _).
+    - Purpose: True if X is a Christian figure.
+    - Query: christian_figure(jesus).
+
+35. jewish_figure(X) :- god(X, jewish, _, _, _).
+    - Purpose: True if X is a Jewish figure.
+    - Query: jewish_figure(moses).
+
+36. abrahamic_figure(X) :- god(X, abrahamic, _, _, _).
+    - Purpose: True if X is an Abrahamic figure.
+    - Query: abrahamic_figure(abraham).
+
+37. same_mythology(X, Y) :- god(X, M, _, _, _), god(Y, M, _, _, _), X \= Y.
+    - Purpose: True if X and Y belong to the same mythology.
+    - Query: same_mythology(zeus, hera).
+
+38. same_domain(X, Y) :- domain(X, D), domain(Y, D), X \= Y.
+    - Purpose: True if X and Y share a domain.
+    - Query: same_domain(zeus, thor).
+
+39. multi_domain_god(X) :- domain(X, D1), domain(X, D2), D1 \= D2.
+    - Purpose: True if X has more than one domain.
+    - Query: multi_domain_god(zeus).
+
+================================================================================
+DOMAIN-SPECIFIC RULES
+================================================================================
+
+40. war_deity(X) :- domain(X, war).
+    war_deity(X) :- domain(X, warfare).
+    - Purpose: True if X is a war deity.
+    - Query: war_deity(ares).
+
+41. wisdom_deity(X) :- domain(X, wisdom).
+    - Purpose: True if X is a wisdom deity.
+    - Query: wisdom_deity(athena).
+
+42. love_deity(X) :- domain(X, love).
+    - Purpose: True if X is a love deity.
+    - Query: love_deity(aphrodite).
+
+43. fertility_deity(X) :- domain(X, fertility).
+    - Purpose: True if X is a fertility deity.
+    - Query: fertility_deity(freya).
+
+44. sky_deity(X) :- domain(X, sky).
+    - Purpose: True if X is a sky deity.
+    - Query: sky_deity(zeus).
+
+45. sun_deity(X) :- domain(X, sun).
+    - Purpose: True if X is a sun deity.
+    - Query: sun_deity(amaterasu).
+
+46. moon_deity(X) :- domain(X, moon).
+    - Purpose: True if X is a moon deity.
+    - Query: moon_deity(tsukuyomi).
+
+47. celestial_deity(X) :- sky_deity(X).
+    celestial_deity(X) :- sun_deity(X).
+    celestial_deity(X) :- moon_deity(X).
+    - Purpose: True if X is a celestial deity (sky, sun, or moon).
+    - Query: celestial_deity(apollo).
+
+48. death_deity(X) :- domain(X, death).
+    - Purpose: True if X is a death deity.
+    - Query: death_deity(hades).
+
+49. underworld_deity(X) :- domain(X, underworld).
+    - Purpose: True if X is an underworld deity.
+    - Query: underworld_deity(hades).
+
+50. afterlife_deity(X) :- domain(X, afterlife).
+    - Purpose: True if X is an afterlife deity.
+    - Query: afterlife_deity(osiris).
+
+51. nature_deity(X) :- domain(X, nature).
+    nature_deity(X) :- domain(X, earth).
+    nature_deity(X) :- domain(X, sea).
+    nature_deity(X) :- domain(X, water).
+    - Purpose: True if X is a nature deity.
+    - Query: nature_deity(dagda).
+
+52. thunder_deity(X) :- domain(X, thunder).
+    - Purpose: True if X is a thunder deity.
+    - Query: thunder_deity(zeus).
+
+53. storm_deity(X) :- domain(X, storm).
+    - Purpose: True if X is a storm deity.
+    - Query: storm_deity(susanoo).
+
+================================================================================
+HELPER & RECURSIVE RULES
+================================================================================
+
+54. child_count(Parent, Count) :- findall(Child, parent(Parent, Child), Children), length(Children, Count).
+    - Purpose: Counts the number of children a deity has.
+    - Query: child_count(zeus, N).
+
+55. sibling_count(God, Count) :- findall(Sibling, sibling(God, Sibling), Siblings), length(Siblings, Count).
+    - Purpose: Counts the number of siblings a deity has.
+    - Query: sibling_count(thor, N).
+
+56. has_children(X) :- parent(X, _).
+    - Purpose: True if X has any children.
+    - Query: has_children(zeus).
+
+57. has_parents(X) :- parent(_, X).
+    - Purpose: True if X has any parents.
+    - Query: has_parents(ares).
+
+58. orphan(X) :- god(X, _, _, _, _), \+ has_parents(X).
+    - Purpose: True if X has no known parents.
+    - Query: orphan(athena).
+
+59. childless(X) :- god(X, _, _, _, _), \+ has_children(X).
+    - Purpose: True if X has no children.
+    - Query: childless(athena).
+
+60. pantheon_head(X, Mythology) :- god(X, Mythology, _, supreme_deity, _).
+    - Purpose: True if X is the supreme deity of a mythology.
+    - Query: pantheon_head(zeus, greek).
+
+
+
+61. descendants(A, Descendants) :- findall(D, descendant(D, A), Descendants).
+    - Purpose: Collects all descendants of a deity. (Recursive)
+    - Query: descendants(zeus, List).
+
+62. count_descendants(A, Count) :- descendants(A, Descendants), length(Descendants, Count).
+    - Purpose: Counts all descendants of a deity. (Recursive)
+    - Query: count_descendants(chronus, N).
+
+63. lineage(D, [D|Rest]) :- parent(P, D), lineage(P, Rest).
+    lineage(D, [D]) :- \+ has_parents(D).
+    - Purpose: Builds a list of ancestors up to the root. (Recursive)
+    - Query: lineage(apollo, Line).
+

@@ -1,0 +1,469 @@
+PRIMARY FACT STRUCTURE:
+god(Name, Mythology, Gender, Status, Era)
+
+PARAMETERS EXPLAINED:
+- Name: The deity's name (atom)
+- Mythology: The religious/mythological tradition (greek, norse, hindu, etc.)
+- Gender: male, female, none, or neutral
+- Status: supreme_deity, major_deity, minor_deity, primordial, prophet, avatar, divine_figure
+- Era: ancient, classical, medieval, modern
+
+
+
+% See all mythologies represented
+forall(pantheon_head(God, Mythology), (write(Mythology), write(': '), write(God), nl)).
+
+list_gods_from(greek).      list_gods_from(norse).
+list_gods_from(hindu).      list_gods_from(japanese).
+list_gods_from(egyptian).   list_gods_from(celtic).
+
+forall(greek_god(G), (write(G), nl)).
+forall(norse_god(G), (write(G), nl)).
+forall(hindu_god(G), (write(G), nl)).
+forall(japanese_god(G), (write(G), nl)).
+forall(egyptian_god(G), (write(G), nl)).
+forall(celtic_god(G), (write(G), nl)).
+
+% Count all Greek gods:
+
+
+% Count all supreme deities:
+findall(God, supreme_deity(God), List), length(List, N), write('Supreme deities: '), write(N), nl.
+
+% Count deities by mythology
+findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
+findall(God, norse_god(God), List), length(List, N), write('Norse: '), write(N), nl.
+findall(God, hindu_god(God), List), length(List, N), write('Hindu: '), write(N), nl.
+findall(God, japanese_god(God), List), length(List, N), write('Japanese: '), write(N), nl.
+findall(God, egyptian_god(God), List), length(List, N), write('Egyptian: '), write(N), nl.
+findall(God, celtic_god(God), List), length(List, N), write('Celtic: '), write(N), nl.
+findall(God, islamic_figure(God), List), length(List, N), write('Islamic: '), write(N), nl.
+findall(God, christian_figure(God), List), length(List, N), write('Christian: '), write(N), nl.
+findall(God, jewish_figure(God), List), length(List, N), write('Jewish: '), write(N), nl.
+findall(God, abrahamic_figure(God), List), length(List, N), write('Abrahamic: '), write(N), nl.
+
+
+================================================================================
+
+% List all supreme deities
+forall(supreme_deity(God), (write('Supreme Deity: '), write(God), nl)).
+
+% Individual supreme deity checks
+supreme_deity(zeus). 
+supreme_deity(odin). 
+supreme_deity(brahma).
+supreme_deity(vishnu). 
+supreme_deity(shiva). 
+supreme_deity(amaterasu).
+supreme_deity(ra). 
+supreme_deity(amun). 
+supreme_deity(dagda). 
+supreme_deity(allah).
+
+================================================================================
+
+% Formatted mythology displays
+list_gods_from(greek).      
+list_gods_from(norse).
+list_gods_from(hindu).      
+list_gods_from(japanese).
+list_gods_from(egyptian).   
+list_gods_from(celtic).
+
+% Simple lists of gods by mythology
+forall(greek_god(G), (write(G), nl)).
+forall(norse_god(G), (write(G), nl)).
+forall(hindu_god(G), (write(G), nl)).
+forall(japanese_god(G), (write(G), nl)).
+forall(egyptian_god(G), (write(G), nl)).
+forall(celtic_god(G), (write(G), nl)).
+
+% Mythology statistics
+mythology_stats(greek). 
+mythology_stats(norse). 
+mythology_stats(hindu).
+mythology_stats(japanese). 
+mythology_stats(egyptian). 
+mythology_stats(celtic).
+
+================================================================================
+
+
+% Family tree displays
+family_tree(zeus). 
+family_tree(odin). 
+family_tree(shiva). 
+family_tree(amaterasu).
+
+% Parent-child relationships
+parent(zeus, ares). 
+parent(odin, thor). 
+parent(shiva, ganesha).
+father(ares, zeus). 
+mother(athena, metis).
+
+% Sibling relationships
+sibling(zeus, poseidon). 
+full_sibling(zeus, hera). 
+half_sibling(thor, loki).
+
+% Extended family relationships
+cousin(ares, hermes).
+grandparent(chronus, hermes). 
+great_grandparent(uranus, zeus).
+ancestor(chronus, zeus). 
+descendant(ganesha, shiva).
+
+% Marriage relationships
+married(shiva, parvati). 
+married(zeus, hera).
+spouse(odin, frigga). 
+spouse(zeus, hera).
+
+% Uncle/Aunt relationships
+uncle_aunt(hades, hermes). 
+aunt(hera, dionysus).
+
+% Family status checks
+has_children(zeus). 
+childless(athena). 
+has_parents(ares). 
+orphan(athena).
+child_count(zeus, N). 
+sibling_count(thor, N).
+
+================================================================================
+
+% See all domain mappings
+forall(domain(God, Domain), (write(God), write(' -> '), write(Domain), nl)).
+
+% Individual domain checks
+domain(zeus, thunder). 
+domain(odin, wisdom). 
+domain(shiva, destruction).
+domain(amaterasu, sun). 
+domain(dagda, nature).
+
+% Same domain comparisons
+same_domain(zeus, thor). 
+same_domain(odin, athena).
+
+% Domain-specific deity displays
+show_domain_gods(thunder). 
+show_domain_gods(sun).
+show_domain_gods(war). 
+show_domain_gods(wisdom).
+show_domain_gods(love). 
+show_domain_gods(death).
+
+================================================================================
+
+
+% War deities across mythologies
+forall(war_deity(God), (write(God), nl)).
+war_deity(ares). 
+war_deity(thor). 
+war_deity(kartikeya).
+
+% Wisdom deities
+wisdom_deity(athena). 
+wisdom_deity(odin). 
+wisdom_deity(saraswati).
+forall(wisdom_deity(God), (write(God), nl)).
+
+% Other domain-specific deities
+sun_deity(amaterasu). 
+afterlife_deity(osiris). 
+nature_deity(dagda).
+
+================================================================================
+
+
+% Gender-based listings
+forall(male_god(God), (write('Male: '), write(God), nl)).
+forall(female_god(God), (write('Female: '), write(God), nl)).
+forall(gender_neutral(God), (write('Neutral: '), write(God), nl)).
+
+% Combined gender and status queries
+% Female supreme deities
+forall((female_god(G), supreme_deity(G)), write(G)).
+
+% Male war deities
+forall((male_god(G), war_deity(G)), write(G)).
+
+% Female wisdom deities
+forall((female_god(G), wisdom_deity(G)), write(G)).
+
+================================================================================
+
+
+% Pantheon heads
+pantheon_head(zeus, greek). 
+pantheon_head(odin, norse).
+pantheon_head(shiva, hindu). 
+pantheon_head(amaterasu, japanese).
+
+% Same mythology relationships
+same_mythology(zeus, hera). 
+same_mythology(odin, thor).
+
+================================================================================
+
+
+% Status classifications
+major_deity(zeus). 
+minor_deity(erios).
+primordial_deity(chaos). 
+classical_deity(hera).
+medieval_deity(odin). 
+modern_deity(allah).
+
+% Religious figures
+prophet(muhammad). 
+avatar(krishna).
+divine_figure(buddha).
+
+================================================================================
+
+
+% Count queries by category
+findall(God, greek_god(God), List), length(List, N), write('Greek gods: '), write(N), nl.
+findall(God, supreme_deity(God), List), length(List, N), write('Supreme deities: '), write(N), nl.
+findall(God, war_deity(God), List), length(List, N), write('War deities: '), write(N), nl.
+findall(God, female_god(God), List), length(List, N), write('Female deities: '), write(N), nl.
+
+================================================================================
+
+% Complete example session
+list_gods_from(greek).
+family_tree(zeus).
+forall(war_deity(God), (write(God), nl)).
+mythology_stats(norse).
+
+
+================================================================================
+
+
+% Complex relationship analysis
+findall(X, (greek_god(X), has_children(X)), Parents), 
+length(Parents, N), 
+write('Greek gods with children: '), write(N), nl.
+
+% Multi-condition filtering
+forall((wisdom_deity(G), female_god(G)), 
+       (write('Female wisdom deity: '), write(G), nl)).
+
+% Cross-mythology domain analysis
+forall((war_deity(G), greek_god(G)), 
+       (write('Greek war deity: '), write(G), nl)).
+
+% Multiple domain gods
+forall(multi_domain_god(G), 
+       (write('Multi-domain god: '), write(G), nl)).
+
+% Orphaned deities (no known parents)
+forall(orphan(G), 
+       (write('Orphan deity: '), write(G), nl)).
+
+% Childless deities
+forall(childless(G), 
+       (write('Childless deity: '), write(G), nl)).
+
+% Count siblings for specific gods
+sibling_count(zeus, ZeusSiblings),
+write('Zeus has '), write(ZeusSiblings), write(' siblings'), nl.
+
+% Find all ancestors of a deity
+forall(ancestor(A, ares), 
+       (write('Ancestor of Ares: '), write(A), nl)).
+
+% Find all descendants of a deity
+forall(descendant(D, chronus), 
+       (write('Descendant of Chronus: '), write(D), nl)).
+
+% Avatar relationships
+forall(avatar_of(Avatar, Deity), 
+       (write(Avatar), write(' is avatar of '), write(Deity), nl)).
+
+% Married couples across mythologies
+forall(married(X, Y), 
+       (write(X), write(' is married to '), write(Y), nl)).
+
+% Gods with specific number of children
+child_count(zeus, ZeusChildren),
+write('Zeus has '), write(ZeusChildren), write(' children'), nl.
+
+% Cousin relationships
+forall(cousin(X, Y), 
+       (write(X), write(' and '), write(Y), write(' are cousins'), nl)).
+
+% Same domain across different mythologies
+forall((same_domain(X, Y), \+ same_mythology(X, Y)), 
+       (write(X), write(' and '), write(Y), write(' share domains across mythologies'), nl)).
+
+================================================================================
+
+
+% Thunder/Storm deities comparison
+forall(thunder_deity(G), 
+       (write('Thunder deity: '), write(G), nl)).
+
+% Celestial deities (sky, sun, moon)
+forall(celestial_deity(G), 
+       (write('Celestial deity: '), write(G), nl)).
+
+% Death and afterlife deities
+forall(death_deity(G), 
+       (write('Death deity: '), write(G), nl)).
+forall(afterlife_deity(G), 
+       (write('Afterlife deity: '), write(G), nl)).
+
+% Nature deities across cultures
+forall(nature_deity(G), 
+       (write('Nature deity: '), write(G), nl)).
+
+% Love and fertility deities
+forall(love_deity(G), 
+       (write('Love deity: '), write(G), nl)).
+forall(fertility_deity(G), 
+       (write('Fertility deity: '), write(G), nl)).
+
+% Era-based analysis
+forall(ancient_deity(G), 
+       (write('Ancient deity: '), write(G), nl)).
+forall(medieval_deity(G), 
+       (write('Medieval deity: '), write(G), nl)).
+
+% Primordial beings
+forall(primordial_deity(G), 
+       (write('Primordial deity: '), write(G), nl)).
+
+% Religious prophets
+forall(prophet(G), 
+       (write('Prophet: '), write(G), nl)).
+
+% Divine avatars
+forall(avatar(G), 
+       (write('Avatar: '), write(G), nl)).
+
+================================================================================
+
+
+% Complete mythology statistics
+forall(mythology_stats(M), true).
+
+% Gender distribution analysis
+findall(G, male_god(G), Males), length(Males, MaleCount),
+findall(G, female_god(G), Females), length(Females, FemaleCount),
+findall(G, gender_neutral(G), Neutrals), length(Neutrals, NeutralCount),
+write('Male deities: '), write(MaleCount), nl,
+write('Female deities: '), write(FemaleCount), nl,
+write('Gender neutral deities: '), write(NeutralCount), nl.
+
+
+
+% Domain popularity analysis
+findall(D, domain(_, D), AllDomains), 
+sort(AllDomains, UniqueDomains), 
+length(UniqueDomains, DomainCount),
+write('Total unique domains: '), write(DomainCount), nl.
+
+================================================================================
+
+
+Total Queries Documented: 100+
+Categories Covered: 10 major query types
+Complexity Levels: Basic to Advanced
+Educational Value: Complete reference for learning Prolog and mythology analysis
+-----------------------------------------------------------
+
+
+% See all mythologies represented
+forall(pantheon_head(God, Mythology), (write(Mythology), write(': '), write(God), nl)).
+
+% Count deities by mythology
+findall(God, greek_god(God), List), length(List, N), write('Greek: '), write(N), nl.
+findall(God, norse_god(God), List), length(List, N), write('Norse: '), write(N), nl.
+findall(God, hindu_god(God), List), length(List, N), write('Hindu: '), write(N), nl.
+findall(God, japanese_god(God), List), length(List, N), write('Japanese: '), write(N), nl.
+findall(God, egyptian_god(God), List), length(List, N), write('Egyptian: '), write(N), nl.
+findall(God, celtic_god(God), List), length(List, N), write('Celtic: '), write(N), nl.
+findall(God, islamic_figure(God), List), length(List, N), write('Islamic: '), write(N), nl.
+findall(God, christian_figure(God), List), length(List, N), write('Christian: '), write(N), nl.
+findall(God, jewish_figure(God), List), length(List, N), write('Jewish: '), write(N), nl.
+findall(God, abrahamic_figure(God), List), length(List, N), write('Abrahamic: '), write(N), nl.
+---------------------------------------------------------------
+
+forall(supreme_deity(God), (write('Supreme Deity: '), write(God), nl)).
+supreme_deity(zeus). supreme_deity(odin). supreme_deity(brahma).
+supreme_deity(vishnu). supreme_deity(shiva). supreme_deity(amaterasu).
+supreme_deity(ra). supreme_deity(amun). supreme_deity(dagda). supreme_deity(allah).
+  #
+============================================================================
+
+mythology_stats(greek). mythology_stats(norse). mythology_stats(hindu).
+mythology_stats(japanese). mythology_stats(egyptian). mythology_stats(celtic).
+
+============================================================================
+
+family_tree(zeus). family_tree(odin). family_tree(shiva). family_tree(amaterasu).
+
+parent(zeus, ares). parent(odin, thor). parent(shiva, ganesha).
+father(ares, zeus). mother(athena, metis).
+sibling(zeus, poseidon). full_sibling(zeus, hera). half_sibling(thor, loki).
+cousin(ares, hermes).
+grandparent(chronus, hermes). great_grandparent(uranus, zeus).
+ancestor(chronus, zeus). descendant(ganesha, shiva).
+
+married(shiva, parvati). married(zeus, hera).
+spouse(odin, frigga). spouse(zeus, hera).
+
+uncle_aunt(hades, hermes). aunt(hera, dionysus).
+
+has_children(zeus). childless(athena). has_parents(ares). orphan(athena).
+child_count(zeus, N). sibling_count(thor, N).
+
+============================================================================
+
+to see Domain o all god =  forall(domain(God, Domain), (write(God), write(' -> '), write(Domain), nl)).
+============================================================================
+domain(zeus, thunder). domain(odin, wisdom). domain(shiva, destruction).
+domain(amaterasu, sun). domain(dagda, nature).
+same_domain(zeus, thor). same_domain(odin, athena).
+
+show_domain_gods(thunder). show_domain_gods(sun).
+show_domain_gods(war). show_domain_gods(wisdom).
+show_domain_gods(love). show_domain_gods(death).
+
+============================================================================
+
+forall(war_deity(God), (write(God), nl)).
+war_deity(ares). war_deity(thor). war_deity(kartikeya).
+wisdom_deity(athena). wisdom_deity(odin). wisdom_deity(saraswati).
+sun_deity(amaterasu). afterlife_deity(osiris). nature_deity(dagda).
+
+
+forall(wisdom_deity(God), (write(God), nl)).
+
+============================================================================
+
+forall(male_god(God), (write('Male: '), write(God), nl)).
+forall(female_god(God), (write('Female: '), write(God), nl)).
+forall(gender_neutral(God), (write('Neutral: '), write(God), nl)).
+
+female supreme deities: forall((female_god(G), supreme_deity(G)), write(G)).
+male war deities: forall((male_god(G), war_deity(G)), write(G)).
+female wisdom deities: forall((female_god(G), wisdom_deity(G)), write(G)).
+
+============================================================================
+
+pantheon_head(zeus, greek). pantheon_head(odin, norse).
+pantheon_head(shiva, hindu). pantheon_head(amaterasu, japanese).
+
+same_mythology(zeus, hera). same_mythology(odin, thor).
+major_deity(zeus). minor_deity(erios).
+primordial_deity(chaos). classical_deity(hera).
+medieval_deity(odin). modern_deity(allah).
+
+prophet(muhammad). avatar(krishna).
+divine_figure(buddha).

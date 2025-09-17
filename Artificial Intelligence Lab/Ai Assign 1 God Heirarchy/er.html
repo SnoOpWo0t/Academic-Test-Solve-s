@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mythology Database ER Diagram</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .diagram-container {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #34495e;
+            border-radius: 10px;
+            position: relative;
+            background: linear-gradient(45deg, #f8f9fa 25%, transparent 25%, transparent 75%, #f8f9fa 75%, #f8f9fa),
+                        linear-gradient(45deg, #f8f9fa 25%, transparent 25%, transparent 75%, #f8f9fa 75%, #f8f9fa);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            overflow: auto;
+        }
+
+        .entity {
+            position: absolute;
+            border: 3px solid #2c3e50;
+            border-radius: 8px;
+            background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            padding: 15px;
+            min-width: 140px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .entity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        }
+
+        .entity-title {
+            font-weight: bold;
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .entity-attributes {
+            font-size: 12px;
+            color: #34495e;
+            line-height: 1.4;
+        }
+
+        .primary-key {
+            color: #e74c3c;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        .foreign-key {
+            color: #3498db;
+            font-style: italic;
+        }
+
+        .relationship {
+            position: absolute;
+            border: 2px solid #e67e22;
+            background: linear-gradient(145deg, #f39c12, #e67e22);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            min-width: 80px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .relationship:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .connection-line {
+            position: absolute;
+            background: #34495e;
+            z-index: -1;
+        }
+
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid #34495e;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .legend-item {
+            margin: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 15px;
+            margin-right: 8px;
+            border-radius: 3px;
+        }
+
+        /* Entity positioning */
+        .god-entity { top: 50px; left: 200px; }
+        .domain-entity { top: 50px; left: 500px; }
+        .family-entity { top: 250px; left: 350px; }
+        .spouse-entity { top: 450px; left: 200px; }
+        .avatar-entity { top: 450px; left: 500px; }
+
+        /* Relationship positioning */
+        .has-domain-rel { top: 120px; left: 380px; }
+        .parent-child-rel { top: 180px; left: 280px; }
+        .married-rel { top: 380px; left: 280px; }
+        .avatar-of-rel { top: 380px; left: 520px; }
+
+        /* Connection lines */
+        .line1 { width: 2px; height: 70px; top: 120px; left: 280px; }
+        .line2 { width: 80px; height: 2px; top: 120px; left: 280px; }
+        .line3 { width: 2px; height: 70px; top: 120px; left: 480px; }
+        .line4 { width: 80px; height: 2px; top: 120px; left: 400px; }
+
+        .line5 { width: 2px; height: 50px; top: 210px; left: 320px; }
+        .line6 { width: 2px; height: 40px; top: 250px; left: 320px; }
+
+        .line7 { width: 2px; height: 70px; top: 410px; left: 280px; }
+        .line8 { width: 2px; height: 50px; top: 450px; left: 280px; }
+
+        .line9 { width: 2px; height: 70px; top: 410px; left: 580px; }
+        .line10 { width: 2px; height: 50px; top: 450px; left: 580px; }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 20px;
+            }
+            .diagram-container {
+                height: 600px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Mythology Database ER Diagram</h1>
+        
+        <div class="diagram-container">
+            <!-- Entities -->
+            <div class="entity god-entity">
+                <div class="entity-title">GOD</div>
+                <div class="entity-attributes">
+                    <div class="primary-key">name</div>
+                    <div>mythology</div>
+                    <div>gender</div>
+                    <div>status</div>
+                    <div>era</div>
+                </div>
+            </div>
+
+            <div class="entity domain-entity">
+                <div class="entity-title">DOMAIN</div>
+                <div class="entity-attributes">
+                    <div class="primary-key">domain_name</div>
+                    <div>category</div>
+                    <div>description</div>
+                </div>
+            </div>
+
+            <div class="entity family-entity">
+                <div class="entity-title">FAMILY_RELATION</div>
+                <div class="entity-attributes">
+                    <div class="foreign-key">parent_god</div>
+                    <div class="foreign-key">child_god</div>
+                    <div>relation_type</div>
+                </div>
+            </div>
+
+            <div class="entity spouse-entity">
+                <div class="entity-title">SPOUSE</div>
+                <div class="entity-attributes">
+                    <div class="foreign-key">god1</div>
+                    <div class="foreign-key">god2</div>
+                    <div>marriage_type</div>
+                </div>
+            </div>
+
+            <div class="entity avatar-entity">
+                <div class="entity-title">AVATAR</div>
+                <div class="entity-attributes">
+                    <div class="foreign-key">avatar_god</div>
+                    <div class="foreign-key">original_god</div>
+                    <div>manifestation_type</div>
+                </div>
+            </div>
+
+            <!-- Relationships -->
+            <div class="relationship has-domain-rel">
+                HAS_DOMAIN<br>
+                <small>(M:N)</small>
+            </div>
+
+            <div class="relationship parent-child-rel">
+                PARENT_OF<br>
+                <small>(1:N)</small>
+            </div>
+
+            <div class="relationship married-rel">
+                MARRIED_TO<br>
+                <small>(1:1)</small>
+            </div>
+
+            <div class="relationship avatar-of-rel">
+                AVATAR_OF<br>
+                <small>(N:1)</small>
+            </div>
+
+            <!-- Connection Lines -->
+            <div class="connection-line line1"></div>
+            <div class="connection-line line2"></div>
+            <div class="connection-line line3"></div>
+            <div class="connection-line line4"></div>
+            <div class="connection-line line5"></div>
+            <div class="connection-line line6"></div>
+            <div class="connection-line line7"></div>
+            <div class="connection-line line8"></div>
+            <div class="connection-line line9"></div>
+            <div class="connection-line line10"></div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <h4 style="margin-top: 0; color: #2c3e50;">Legend</h4>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(145deg, #ecf0f1, #bdc3c7);"></div>
+                    Entity
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: linear-gradient(145deg, #f39c12, #e67e22);"></div>
+                    Relationship
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e74c3c;"></div>
+                    Primary Key
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #3498db;"></div>
+                    Foreign Key
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #34495e;"></div>
+                    Connection
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: rgba(52, 73, 94, 0.1); border-radius: 10px;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">📋 Database Schema Notes</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 14px;">
+                <div>
+                    <h4 style="color: #34495e;">Entity Descriptions:</h4>
+                    <ul style="color: #555; line-height: 1.6;">
+                        <li><strong>GOD:</strong> Core entity representing deities from various mythologies</li>
+                        <li><strong>DOMAIN:</strong> Areas of power/influence (war, wisdom, love, etc.)</li>
+                        <li><strong>FAMILY_RELATION:</strong> Parent-child relationships between gods</li>
+                        <li><strong>SPOUSE:</strong> Marriage relationships between deities</li>
+                        <li><strong>AVATAR:</strong> Divine manifestations (e.g., Rama as avatar of Vishnu)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #34495e;">Key Relationships:</h4>
+                    <ul style="color: #555; line-height: 1.6;">
+                        <li><strong>HAS_DOMAIN (M:N):</strong> Gods can have multiple domains, domains can belong to multiple gods</li>
+                        <li><strong>PARENT_OF (1:N):</strong> One god can have many children</li>
+                        <li><strong>MARRIED_TO (1:1):</strong> Monogamous marriage relationships</li>
+                        <li><strong>AVATAR_OF (N:1):</strong> Multiple avatars can belong to one original deity</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.querySelectorAll('.entity, .relationship').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+
+        // Add click functionality for detailed view
+        document.querySelectorAll('.entity').forEach(entity => {
+            entity.addEventListener('click', function() {
+                const entityName = this.querySelector('.entity-title').textContent;
+                
+                // Create modal or alert with more details
+                let details = '';
+                switch(entityName) {
+                    case 'GOD':
+                        details = 'Contains 67 records across 7 mythologies:\n• Greek (17), Norse (11), Hindu (14)\n• Japanese (9), Egyptian (10), Celtic (6)\n• Attributes: name, mythology, gender, status, era';
+                        break;
+                    case 'DOMAIN':
+                        details = 'Power domains include:\n• War, Wisdom, Love, Death, Nature\n• Thunder, Sun, Moon, Fertility\n• Each god can have multiple domains';
+                        break;
+                    case 'FAMILY_RELATION':
+                        details = 'Family relationships:\n• Father-child, Mother-child\n• Enables complex family tree queries\n• Supports multi-generational relationships';
+                        break;
+                    case 'SPOUSE':
+                        details = 'Marriage relationships:\n• Zeus-Hera, Shiva-Parvati\n• Brahma-Saraswati, Osiris-Isis\n• Supports spouse-based queries';
+                        break;
+                    case 'AVATAR':
+                        details = 'Divine manifestations:\n• Rama and Krishna (avatars of Vishnu)\n• Represents different forms of the same deity\n• Common in Hindu mythology';
+                        break;
+                }
+                
+                alert(`${entityName} Entity Details:\n\n${details}`);
+            });
+        });
+    </script>
+</body>
+</html>
